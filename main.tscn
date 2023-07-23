@@ -1,0 +1,179 @@
+[gd_scene load_steps=10 format=3 uid="uid://gs81txr8qg68"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_vxst4"]
+[ext_resource type="AudioStream" uid="uid://c4t63qu7nheg5" path="res://src/ti_si_kao_iz_sna-sopran.mp3" id="1_xjdd5"]
+[ext_resource type="AudioStream" uid="uid://biwm7wkw1hkvb" path="res://src/ti_si_kao_iz_sna-alt.mp3" id="3_ed6qv"]
+[ext_resource type="AudioStream" uid="uid://6tkv4i6tijpr" path="res://src/ti_si_kao_iz_sna-tenor.mp3" id="4_f6oyn"]
+[ext_resource type="AudioStream" uid="uid://cio4wkw5scbi7" path="res://src/ti_si_kao_iz_sna-bas.mp3" id="5_fbm60"]
+[ext_resource type="FontFile" uid="uid://bjyc0530r267l" path="res://fonts/Xolonium-Regular.otf" id="7_4p5u3"]
+[ext_resource type="Texture2D" uid="uid://dnwv8cmudkhwq" path="res://src/play-button-4210.svg" id="8_63e0u"]
+[ext_resource type="FontFile" uid="uid://c6uxsfcej6bar" path="res://fonts/Xolonium-Bold.otf" id="8_i2xgq"]
+[ext_resource type="Texture2D" uid="uid://novu66eo4amy" path="res://src/red-circle-pause-button-20591.svg" id="9_75u32"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -30.0
+offset_right = 6.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vxst4")
+
+[node name="AudioStreamPlayerSopran" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_xjdd5")
+
+[node name="AudioStreamPlayerAlt" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ed6qv")
+
+[node name="AudioStreamPlayerTenor" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_f6oyn")
+
+[node name="AudioStreamPlayerBass" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fbm60")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_i2xgq")
+theme_override_font_sizes/font_size = 25
+text = "Four Vocals"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="CheckButtonSopran" type="CheckButton" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckButtonAlt" type="CheckButton" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckButtonTenor" type="CheckButton" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+
+[node name="CheckButtonBass" type="CheckButton" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="LabelPosition" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_4p5u3")
+text = "0:0"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="TextureButtonPlay" type="TextureButton" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+texture_normal = ExtResource("8_63e0u")
+texture_pressed = ExtResource("9_75u32")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="ButtonFromBarPlus" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_4p5u3")
+text = "+B"
+
+[node name="ButtonFromBeatPlus" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_4p5u3")
+text = "+b"
+
+[node name="LabelFrom" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_4p5u3")
+text = "0:0"
+
+[node name="ButtonFromBarMinus" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_4p5u3")
+text = "-B"
+
+[node name="ButtonFromBeatMinus" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer4"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_4p5u3")
+text = "-b"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="ButtonToBarPlus" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_4p5u3")
+text = "+B"
+
+[node name="ButtonToBeatPlus" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_4p5u3")
+text = "+b"
+
+[node name="LabelTo" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_4p5u3")
+text = "0:0"
+
+[node name="ButtonToBarMinus" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_4p5u3")
+text = "-B"
+
+[node name="ButtonToBeatMinus" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer5"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_4p5u3")
+text = "-b"
