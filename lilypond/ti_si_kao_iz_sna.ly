@@ -2,7 +2,7 @@
 \include "deutsch.ly"
 jazzChords = { \semiGermanChords }
 aFourL = {}
-%\include "../config/include.ily"
+\include "./config/include.ily"
 markMoj = #(define-music-function (letter) (string?) #{ \mark \markup { \box \bold #letter } #})
 
 \layout {
@@ -10,12 +10,12 @@ markMoj = #(define-music-function (letter) (string?) #{ \mark \markup { \box \bo
 }
 
 \header {
-  titlex = "Pjevajte Jahvi"
+  titlex = "Scifidelity Orchestra"
   title = "TI SI KAO IZ SNA"
   composer = "Nacio Herb Brown"
   %poet = "Gus Kahn prev. Filip Horvat"
   style = "Gus Kahn prev. Filip Horvat"
-  broj = "1"
+  broj = ""
   %tagline = \markup { \override #'(font-name . "JohnSans White Pro") \override #'(font-size . -3) { Izvorno: Name, Album } }
 }
 
@@ -29,6 +29,10 @@ markMoj = #(define-music-function (letter) (string?) #{ \mark \markup { \box \bo
 }
 
 staffOne = \relative c' {
+  \override Score.BarNumber.break-visibility = ##(#t #t #t)
+  \voiceOne
+  \tempo 4 = 120
+  \key a \major
   \time 4/4
   \clef bass \markMoj "A" cis2 r2 |
   r8 cis4. cis8 cis8 cis8 d8 ~|
@@ -192,7 +196,9 @@ lyricOneZero = \lyricmode {
 }
 
 staffTwo = \relative c' {
+  \voiceTwo
   \time 4/4
+  \key a \major
   \clef bass a,2 r2 |
   r8 gis4. fis8 fis8 gis8 a8 (~|
   a1 |
@@ -247,7 +253,9 @@ staffTwo = \relative c' {
 }
 
 staffThree = \relative c' {
+  \voiceOne
   \time 4/4
+  \key a \major
   \clef bass
   e,2 r2 |
   r8 e4. e8 e8 e8 f8 ~|
@@ -303,7 +311,9 @@ staffThree = \relative c' {
 }
 
 staffFour = \relative c' {
+  \voiceTwo
   \time 4/4
+  \key a \major
   \clef bass
   a,2 r2 |
   r8 a4. a8 a8 a8 b8 ~|
@@ -358,14 +368,56 @@ staffFour = \relative c' {
   cis1 \bar "|." |
 }
 
+%\score {
+%    <<
+%    \new ChoirStaff \with { \accepts NullVoice }
+%        <<
+%        \new Staff \partCombine \staffOne \staffTwo
+%        \new NullVoice = "alignerOneZero" { \alignerOneZero }
+%        \new Lyrics \lyricsto "alignerOneZero" { \lyricOneZero }
+%        \new Staff \partCombine \staffThree \staffFour
+%        >>
+%    >>
+%    \layout { }
+%    \midi { }
+%}
+
 \score {
-    <<
-    \new ChoirStaff \with { \accepts NullVoice }
-        <<
-        \new Staff \partCombine \staffOne \staffTwo
-        \new NullVoice = "alignerOneZero" { \alignerOneZero }
-        \new Lyrics \lyricsto "alignerOneZero" { \lyricOneZero }
-        \new Staff \partCombine \staffThree \staffFour
-        >>
+  \context StaffGroup <<
+    \context Staff = "upper" <<
+      \clef treble
+      \context Voice = "one" \staffOne
+      \context Voice = "two" \staffTwo
+      \context NullVoice = "aligner" \alignerOneZero
     >>
+    \new Lyrics \lyricsto "aligner" {
+      \lyricOneZero
+    }
+    \context Staff = "lower" <<
+      \clef bass
+      \context Voice = "one" \staffThree
+      \context Voice = "two" \staffFour
+    >>
+  >>
+  \layout {
+    \context {
+      \Lyrics
+      \override VerticalAxisGroup.nonstaff-relatedstaff-spacing = #'((padding . 1.2))
+    }
+    \context {
+      \StaffGroup
+      \remove "Span_bar_engraver"
+    }
+    \context {
+      \Staff
+     \override VerticalAxisGroup.staff-staff-spacing = #'((padding . 0))
+      autoBeaming = ##t
+      \unset melismaBusyProperties 
+    }
+    \context {
+      \Score
+      \remove "Bar_number_engraver"
+    }
+  }
+  \midi { }
 }
